@@ -29,21 +29,17 @@ public class ServerThread implements Runnable{
             
             clientSocket.getInetAddress();
             
-            OutputStream versoIlClient = 
-                    clientSocket.getOutputStream();
-            BufferedWriter scrittore = new BufferedWriter(
-                    new OutputStreamWriter(versoIlClient));
-            InputStream dalClient = clientSocket.getInputStream();
-            BufferedReader lettore = new BufferedReader(new InputStreamReader(dalClient));
+            PrintWriter riceve = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader lettore = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String richiesta = "";
             
-            while(!richiesta.equals(true)) {
+            while(!richiesta.equals("exit")) {
                 richiesta = lettore.readLine();
-                System.out.println("stringa dal client: ");
-                scrittore.write(richiesta.toUpperCase());
-                
+                System.out.println("stringa dal client: "+richiesta);
+                riceve.println(richiesta.toUpperCase());
             }
-            scrittore.close();
+            
+            riceve.close();
             clientSocket.close();
             
             System.out.println("chiusura connessione effettuata");
