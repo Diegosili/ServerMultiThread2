@@ -36,7 +36,7 @@ public class ServerThread implements Runnable{
             while(!richiesta.equals("exit")) {
                 richiesta = lettore.readLine();
                 System.out.println("stringa dal client: "+richiesta);
-                riceve.println(richiesta.toUpperCase());
+                riceve.println("caratteri: "+richiesta.length());
             }
             
             riceve.close();
