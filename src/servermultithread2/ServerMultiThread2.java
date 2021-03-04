@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servermultithread;
+package servermultithread2;
 
 import java.io.*;
 import java.net.*;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author siliprandi.diego
  */
-public class ServerMultiThread {
+public class ServerMultiThread2 {
 
     /**
      * 
@@ -28,14 +28,15 @@ public class ServerMultiThread {
             while(true) {
                 Socket client = server.accept();
                 System.out.println("connessione ricevuta");
-                Thread Serverino = new Thread(new ServerThread(client));
+                Thread Serverino = new Thread(new ServerThread2(client));
                 Serverino.start();
+                
                 
             }
             
             
         } catch (IOException ex) {
-            Logger.getLogger(ServerMultiThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerMultiThread2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

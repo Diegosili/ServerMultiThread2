@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servermultithread;
+package servermultithread2;
 
 import java.io.*;
 import java.net.*;
@@ -14,11 +14,11 @@ import java.util.logging.Logger;
  *
  * @author siliprandi.diego
  */
-public class ServerThread implements Runnable{
+public class ServerThread2 implements Runnable{
 
     private  Socket clientSocket;
     
-    public ServerThread(Socket clientSocket) {
+    public ServerThread2(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
     
@@ -26,26 +26,24 @@ public class ServerThread implements Runnable{
     public void run() {
         System.out.println("Server partito: "+clientSocket.getInetAddress());
         try {
-            
             clientSocket.getInetAddress();
             
             PrintWriter riceve = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader lettore = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String richiesta = "";
+            Integer richiesta = 0;
             
-            while(!richiesta.equals("exit")) {
-                richiesta = lettore.readLine();
-                System.out.println("stringa dal client: "+richiesta);
-                riceve.println("caratteri: "+richiesta.length());
-            }
+            richiesta = clientSocket.parselnt(String.valueOf(lettore.read()));
+            System.out.println("numero di server richiesti dal client: "+richiesta);
+            
             
             riceve.close();
             clientSocket.close();
             
             System.out.println("chiusura connessione effettuata");
         } catch (IOException ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerThread2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
 }
